@@ -1,0 +1,754 @@
+<html>
+<head></head>
+<body>
+    <div class="wrap">
+        <div class="content-sidebar-wrap">
+            <main class="content">
+                <div class="breadcrumb">Usted está aquí:
+                    <span class="breadcrumb-link-wrap"><a class="breadcrumb-link" href="https://www.arquitecturajava.com/"><span class="breadcrumb-link-text-wrap">Inicio</span></a>
+                    <meta></span> <span aria-label="breadcrumb separator">/</span>
+                    <span class="breadcrumb-link-wrap"><a class="breadcrumb-link" href="https://www.arquitecturajava.com/categoria/java-basico/"><span class="breadcrumb-link-text-wrap">Java Basico</span></a>
+                    <meta></span> <span aria-label="breadcrumb separator">/</span> Java equals y hashcode ¿Como
+                    funcionan?
+                </div>
+                <article
+                    class="post-7013 post type-post status-publish format-standard has-post-thumbnail category-java-basico tag-java-api entry"
+                    aria-label="Java equals y hashcode ¿Como funcionan?">
+                    <header class="entry-header">
+                        <h1 class="entry-title">Java equals y hashcode ¿Como funcionan?</h1>
+                        <p class="entry-meta"><time class="entry-time">27/02/2024</time> Por
+                            <span class="entry-author"><span class="entry-author-name">Cecilio Álvarez Caules</span></span>
+                            <span class="entry-comments-link"><a href="https://www.arquitecturajava.com/entiendo-los-metodos-de-java-equals-y-hashcode/#comments">25 comentarios</a></span>
+                        </p>
+                    </header>
+                    <p><a href="https://www.arquitecturajava.com/cursos-arquitectura-java-fundae/"></a></p>
+                    <p></p>
+                    <div class="entry-content">
+
+
+
+
+                        <p>¿Para que sirven los métodos de Java equals y hashCode? .Todos los días cuando programamos
+                            usamos objetos y en muchas ocasiones necesitamos comparar unos con otros. Para ello en
+                            muchas ocasiones usamos los métodos de <strong>de Java equals y hashcode.</strong> Estos
+                            métodos pertenecen a las clase Object y generan muchas dudas entre los programadores que
+                            están empezando.</p>
+
+
+                        <div class="wp-block-image">
+                            <figure class="aligncenter size-full">
+                                <img decoding="async" width="128" height="191" src="https://www.arquitecturajava.com/wp-content/uploads/equalshashcode.png" alt="" class="wp-image-20092 entered lazyloaded" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/equalshashcode.png" data-ll-status="loaded"><noscript><img decoding="async" width="128" height="191" src="https://www.arquitecturajava.com/wp-content/uploads/equalshashcode.png" alt="" class="wp-image-20092"/></noscript>
+                            </figure>
+                        </div>
+
+
+                        <p>La clase Object es la clase padre del resto y dispone de un conjunto de métodos que las
+                            clases hijas pueden <a
+                                href="https://www.arquitecturajava.com/java-override-y-encapsulacion/">sobreescribir</a>
+                            según su necesidad.</p>
+
+
+                        <div class="wp-block-image">
+                            <figure class="aligncenter size-full">
+                                <img decoding="async" width="128" height="435" src="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png" alt="" class="wp-image-20093 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png 128w, https://www.arquitecturajava.com/wp-content/uploads/herencia-10-88x300.png 88w" data-lazy-sizes="(max-width: 128px) 100vw, 128px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png" data-ll-status="loaded" sizes="(max-width: 128px) 100vw, 128px" srcset="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png 128w, https://www.arquitecturajava.com/wp-content/uploads/herencia-10-88x300.png 88w"><noscript><img decoding="async" width="128" height="435" src="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png" alt="" class="wp-image-20093" srcset="https://www.arquitecturajava.com/wp-content/uploads/herencia-10.png 128w, https://www.arquitecturajava.com/wp-content/uploads/herencia-10-88x300.png 88w" sizes="(max-width: 128px) 100vw, 128px" /></noscript>
+                            </figure>
+                        </div>
+
+
+                        <p>Vamos a crear una implementación por defecto para la clase Persona que realice un Override
+                            sobre ambos métodos para entenderlos mejor.</p>
+
+
+
+                        <div
+                            class="enlighter-default enlighter-v-standard enlighter-t-classic enlighter-l-java enlighter-linenumbers enlighter-overflow-scroll ">
+                            <div class="enlighter-toolbar-top enlighter-toolbar">
+                                <div class="enlighter-btn enlighter-btn-raw">
+                                    <div class="enlighter-tooltip">Plain text</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-copy">
+                                    <div class="enlighter-tooltip">Copy to clipboard</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-window">
+                                    <div class="enlighter-tooltip">Open code in new window</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-website">
+                                    <div class="enlighter-tooltip">EnlighterJS 3 Syntax Highlighter</div>
+                                </div>
+                            </div>
+                            <div class="enlighter-code">
+                                <div class="enlighter" style="">
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-k0">package</span><span class="enlighter-k10"> com.arquitecturajava</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text"></span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k0">class</span><span class="enlighter-text"> Persona </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">private</span><span class="enlighter-text"> </span><span class="enlighter-k5">String</span><span class="enlighter-text"> nombre;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">private</span><span class="enlighter-text"> </span><span class="enlighter-k5">int</span><span class="enlighter-text"> edad;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">String</span><span class="enlighter-text"> </span><span class="enlighter-m0">getNombre</span><span class="enlighter-g1">()</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k0">return</span><span class="enlighter-text"> nombre;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">void</span><span class="enlighter-text"> </span><span class="enlighter-m0">setNombre</span><span class="enlighter-g1">(</span><span class="enlighter-k5">String</span><span class="enlighter-text"> nombre</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k9">this</span><span class="enlighter-text">.</span><span class="enlighter-m3">nombre</span><span class="enlighter-text"> = nombre;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">int</span><span class="enlighter-text"> </span><span class="enlighter-m0">getEdad</span><span class="enlighter-g1">()</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k0">return</span><span class="enlighter-text"> edad;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">void</span><span class="enlighter-text"> </span><span class="enlighter-m0">setEdad</span><span class="enlighter-g1">(</span><span class="enlighter-k5">int</span><span class="enlighter-text"> edad</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k9">this</span><span class="enlighter-text">.</span><span class="enlighter-m3">edad</span><span class="enlighter-text"> = edad;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k11">@Override</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">int</span><span class="enlighter-text"> </span><span class="enlighter-m0">hashCode</span><span class="enlighter-g1">()</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k0">final</span><span class="enlighter-text"> </span><span class="enlighter-k5">int</span><span class="enlighter-text"> prime = </span><span class="enlighter-n1">31</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k5">int</span><span class="enlighter-text"> result = </span><span class="enlighter-n1">1</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        result = prime * result + </span><span class="enlighter-g1">((</span><span class="enlighter-text">nombre == </span><span class="enlighter-e1">null</span><span class="enlighter-g1">)</span><span class="enlighter-text"> ? </span><span class="enlighter-n1">0</span><span class="enlighter-text"> : nombre.</span><span class="enlighter-m3">hashCode</span><span class="enlighter-g1">())</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k0">return</span><span class="enlighter-text"> result;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k11">@Override</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">boolean</span><span class="enlighter-text"> </span><span class="enlighter-m0">equals</span><span class="enlighter-g1">(</span><span class="enlighter-text">Object obj</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k9">this</span><span class="enlighter-text"> == obj</span><span class="enlighter-g1">)</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">            </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">true</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text">obj == </span><span class="enlighter-e1">null</span><span class="enlighter-g1">)</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">            </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">false</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-m0">getClass</span><span class="enlighter-g1">()</span><span class="enlighter-text"> != obj.</span><span class="enlighter-m3">getClass</span><span class="enlighter-g1">())</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">            </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">false</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        Persona other = </span><span class="enlighter-g1">(</span><span class="enlighter-text">Persona</span><span class="enlighter-g1">)</span><span class="enlighter-text"> obj;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text">nombre == </span><span class="enlighter-e1">null</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">            </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text">other.</span><span class="enlighter-m3">nombre</span><span class="enlighter-text"> != </span><span class="enlighter-e1">null</span><span class="enlighter-g1">)</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">                </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">false</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-g1">}</span><span class="enlighter-text"> </span><span class="enlighter-k1">else</span><span class="enlighter-text"> </span><span class="enlighter-k1">if</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-text">!nombre.</span><span class="enlighter-m3">equals</span><span class="enlighter-g1">(</span><span class="enlighter-text">other.</span><span class="enlighter-m3">nombre</span><span class="enlighter-g1">))</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">            </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">false</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-e0">true</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span><span class="enlighter-g1">}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="enlighter-raw">package com.arquitecturajava;
+
+                                    public class Persona {
+
+                                    private String nombre;
+                                    private int edad;
+
+                                    public String getNombre() {
+                                    return nombre;
+                                    }
+
+                                    public void setNombre(String nombre) {
+                                    this.nombre = nombre;
+                                    }
+
+                                    public int getEdad() {
+                                    return edad;
+                                    }
+
+                                    public void setEdad(int edad) {
+                                    this.edad = edad;
+                                    }
+
+                                    @Override
+                                    public int hashCode() {
+                                    final int prime = 31;
+                                    int result = 1;
+                                    result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+                                    return result;
+                                    }
+
+                                    @Override
+                                    public boolean equals(Object obj) {
+                                    if (this == obj)
+                                    return true;
+                                    if (obj == null)
+                                    return false;
+                                    if (getClass() != obj.getClass())
+                                    return false;
+                                    Persona other = (Persona) obj;
+                                    if (nombre == null) {
+                                    if (other.nombre != null)
+                                    return false;
+                                    } else if (!nombre.equals(other.nombre))
+                                    return false;
+                                    return true;
+                                    }
+                                    }</div>
+                            </div>
+                            <div class="enlighter-toolbar-bottom enlighter-toolbar"></div>
+                        </div>
+                        <pre class="EnlighterJSRAW enlighter-origin" data-enlighter-language="java"
+                            data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers=""
+                            data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.arquitecturajava;
+
+public class Persona {
+
+    private String nombre;
+    private int edad;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Persona other = (Persona) obj;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
+            return false;
+        return true;
+    }
+}
+</pre>
+
+
+
+                        <p>El método equals es el más sencillo de entender ya que comprueba
+                            <strong>si los dos objetos son del mismo tipo y si su nombre coincide</strong>. En tal caso
+                            el resultado será &nbsp;true y en todos los demás false. Para ello el método realiza una
+                            serie de comparaciones elementales , como es si son de la misma clase si son nulos etc.</p>
+
+
+
+
+
+
+
+                        <h2 class="wp-block-heading" id="h-el-metodo-hashcode">El método HashCode</h2>
+
+
+
+                        <p>Este método viene a complementar al método equals y sirve para comparar objetos
+                            <strong>de una forma más rápida</strong> para ver si pueden ser idénticos o no . Se usa
+                            mucho en estructuras Hash de clave valor en donde se almacecan objetos agrupados.</p>
+
+
+
+                        <figure class="wp-block-image size-full">
+                            <img decoding="async" width="308" height="265" src="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png" alt="" class="wp-image-20094 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes-300x258.png 300w" data-lazy-sizes="(max-width: 308px) 100vw, 308px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png" data-ll-status="loaded" sizes="(max-width: 308px) 100vw, 308px" srcset="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes-300x258.png 300w"><noscript><img decoding="async" width="308" height="265" src="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png" alt="" class="wp-image-20094" srcset="https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/gruposhashcodes-300x258.png 300w" sizes="(max-width: 308px) 100vw, 308px" /></noscript>
+                        </figure>
+
+
+
+                        <p><strong>Cuando Java compara dos objetos en estructuras de tipo hash (HashMap, HashSet etc) primero invoca al método hashcode </strong>para
+                            saber si los objetos van a estar en el mismo grupo . Se trata de una comparación “rapida” si
+                            devuelven el mismo hashCode quiere decir que están en el mismo grupo y que pudieran ser
+                            iguales . De esta manera ya pasa a invocar el método equals y verificar a detalle si son
+                            idénticos o no. </p>
+
+
+
+                        <figure class="wp-block-image size-full">
+                            <img decoding="async" width="290" height="304" src="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png" alt="" class="wp-image-20095 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png 290w, https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals-286x300.png 286w" data-lazy-sizes="(max-width: 290px) 100vw, 290px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png" data-ll-status="loaded" sizes="(max-width: 290px) 100vw, 290px" srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png 290w, https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals-286x300.png 286w"><noscript><img decoding="async" width="290" height="304" src="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png" alt="" class="wp-image-20095" srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals.png 290w, https://www.arquitecturajava.com/wp-content/uploads/hashcodeinvocaequals-286x300.png 286w" sizes="(max-width: 290px) 100vw, 290px" /></noscript>
+                        </figure>
+
+
+
+                        <p>Si el hashcode fuera diferente ya no se sigue comparando sino que se consideran diferentes.
+                        </p>
+
+
+
+                        <figure class="wp-block-image size-full">
+                            <img decoding="async" width="215" height="242" src="https://www.arquitecturajava.com/wp-content/uploads/diferenteshash.png" alt="" class="wp-image-20096 entered lazyloaded" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/diferenteshash.png" data-ll-status="loaded"><noscript><img decoding="async" width="215" height="242" src="https://www.arquitecturajava.com/wp-content/uploads/diferenteshash.png" alt="" class="wp-image-20096"/></noscript>
+                        </figure>
+
+
+
+                        <p>En el caso en el que ambos objetos compartan el mismo
+                            hashcode&nbsp;<strong>Java invocará al método equals() y revisará a detalle si se cumple la igualdad. De esta forma las&nbsp;búsquedas&nbsp;quedan simplificadas en estructuras Hash.</strong>
+                        </p>
+
+
+
+                        <h2 class="wp-block-heading" id="h-manejando-hashset-y-colecciones">Manejando HashSet y
+                            colecciones</h2>
+
+
+
+                        <p>Muchas veces se nos olvida que la invocación a los métodos equals y hashcode forma parte
+                            intrínseca del framework de colecciones. Por ejemplo si construimos dos objetos de tipo
+                            Persona y los añadimos a un HashSet, podemos comprobar
+                            <strong>que la Persona existe utilizando el método contains dentro del conjunto.</strong>
+                        </p>
+
+
+
+                        <div
+                            class="enlighter-default enlighter-v-standard enlighter-t-classic enlighter-l-java enlighter-linenumbers enlighter-overflow-scroll ">
+                            <div class="enlighter-toolbar-top enlighter-toolbar">
+                                <div class="enlighter-btn enlighter-btn-raw">
+                                    <div class="enlighter-tooltip">Plain text</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-copy">
+                                    <div class="enlighter-tooltip">Copy to clipboard</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-window">
+                                    <div class="enlighter-tooltip">Open code in new window</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-website">
+                                    <div class="enlighter-tooltip">EnlighterJS 3 Syntax Highlighter</div>
+                                </div>
+                            </div>
+                            <div class="enlighter-code">
+                                <div class="enlighter" style="">
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-k0">package</span><span class="enlighter-k10"> com.arquitecturajava</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text"></span><span class="enlighter-k0">import</span><span class="enlighter-k10"> java.util.HashSet</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text"></span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k0">class</span><span class="enlighter-text"> Principal </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k0">static</span><span class="enlighter-text"> </span><span class="enlighter-k5">void</span><span class="enlighter-text"> </span><span class="enlighter-m0">main</span><span class="enlighter-g1">(</span><span class="enlighter-k5">String</span><span class="enlighter-g1">[]</span><span class="enlighter-text"> args</span><span class="enlighter-g1">)</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        Persona p1 = </span><span class="enlighter-k3">new</span><span class="enlighter-text"> </span><span class="enlighter-m0">Persona</span><span class="enlighter-g1">()</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        p1.</span><span class="enlighter-m3">setNombre</span><span class="enlighter-g1">(</span><span class="enlighter-s0">"david"</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        Persona p2 = </span><span class="enlighter-k3">new</span><span class="enlighter-text"> </span><span class="enlighter-m0">Persona</span><span class="enlighter-g1">()</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        p2.</span><span class="enlighter-m3">setNombre</span><span class="enlighter-g1">(</span><span class="enlighter-s0">"miguel"</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        HashSet</span><span class="enlighter-g1">&lt;</span><span class="enlighter-text">Persona</span><span class="enlighter-g1">&gt;</span><span class="enlighter-text"> conjunto = </span><span class="enlighter-k3">new</span><span class="enlighter-text"> HashSet</span><span class="enlighter-g1">&lt;&gt;()</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        conjunto.</span><span class="enlighter-m3">add</span><span class="enlighter-g1">(</span><span class="enlighter-text">p1</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        conjunto.</span><span class="enlighter-m3">add</span><span class="enlighter-g1">(</span><span class="enlighter-text">p2</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">        System.</span><span class="enlighter-m3">out</span><span class="enlighter-text">.</span><span class="enlighter-m3">println</span><span class="enlighter-g1">(</span><span class="enlighter-text">conjunto.</span><span class="enlighter-m3">contains</span><span class="enlighter-g1">(</span><span class="enlighter-text">p1</span><span class="enlighter-g1">))</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text">    </span><span class="enlighter-g1">}</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span><span class="enlighter-g1">}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="enlighter-raw">package com.arquitecturajava;
+
+                                    import java.util.HashSet;
+
+                                    public class Principal {
+
+                                    public static void main(String[] args) {
+                                    Persona p1 = new Persona();
+                                    p1.setNombre("david");
+
+                                    Persona p2 = new Persona();
+                                    p2.setNombre("miguel");
+
+                                    HashSet&lt;Persona&gt; conjunto = new HashSet&lt;&gt;();
+                                    conjunto.add(p1);
+                                    conjunto.add(p2);
+
+                                    System.out.println(conjunto.contains(p1));
+                                    }
+
+                                    }</div>
+                            </div>
+                            <div class="enlighter-toolbar-bottom enlighter-toolbar"></div>
+                        </div>
+                        <pre class="EnlighterJSRAW enlighter-origin" data-enlighter-language="java"
+                            data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers=""
+                            data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">package com.arquitecturajava;
+
+import java.util.HashSet;
+
+public class Principal {
+
+    public static void main(String[] args) {
+        Persona p1 = new Persona();
+        p1.setNombre("david");
+
+        Persona p2 = new Persona();
+        p2.setNombre("miguel");
+
+        HashSet&lt;Persona&gt; conjunto = new HashSet&lt;&gt;();
+        conjunto.add(p1);
+        conjunto.add(p2);
+
+        System.out.println(conjunto.contains(p1));
+    }
+
+}
+</pre>
+
+
+
+                        <figure class="wp-block-image"><a
+                                href="https://www.arquitecturajava.com/wp-content/uploads/true.png"><img decoding="async" width="342" height="105" src="https://www.arquitecturajava.com/wp-content/uploads/true.png" alt="true" class="wp-image-7018 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/true.png 342w, https://www.arquitecturajava.com/wp-content/uploads/true-300x92.png 300w" data-lazy-sizes="(max-width: 342px) 100vw, 342px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/true.png" data-ll-status="loaded" sizes="(max-width: 342px) 100vw, 342px" srcset="https://www.arquitecturajava.com/wp-content/uploads/true.png 342w, https://www.arquitecturajava.com/wp-content/uploads/true-300x92.png 300w"><noscript><img decoding="async" width="342" height="105" src="https://www.arquitecturajava.com/wp-content/uploads/true.png" alt="true" class="wp-image-7018" srcset="https://www.arquitecturajava.com/wp-content/uploads/true.png 342w, https://www.arquitecturajava.com/wp-content/uploads/true-300x92.png 300w" sizes="(max-width: 342px) 100vw, 342px" /></noscript></a>
+                        </figure>
+
+
+
+                        <p><strong>Esto nos devolverá true ya que el HashSet contiene este elemento.</strong>&nbsp;Ahora
+                            bien s<strong>i nosotros sobreescribimos de forma incorrecta</strong> el hashcode con el
+                            siguiente código:</p>
+
+
+
+                        <div
+                            class="enlighter-default enlighter-v-standard enlighter-t-classic enlighter-l-java enlighter-linenumbers enlighter-overflow-scroll ">
+                            <div class="enlighter-toolbar-top enlighter-toolbar">
+                                <div class="enlighter-btn enlighter-btn-raw">
+                                    <div class="enlighter-tooltip">Plain text</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-copy">
+                                    <div class="enlighter-tooltip">Copy to clipboard</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-window">
+                                    <div class="enlighter-tooltip">Open code in new window</div>
+                                </div>
+                                <div class="enlighter-btn enlighter-btn-website">
+                                    <div class="enlighter-tooltip">EnlighterJS 3 Syntax Highlighter</div>
+                                </div>
+                            </div>
+                            <div class="enlighter-code">
+                                <div class="enlighter" style="">
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-k11">@Override</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text"> </span><span class="enlighter-k0">public</span><span class="enlighter-text"> </span><span class="enlighter-k5">int</span><span class="enlighter-text"> </span><span class="enlighter-m0">hashCode</span><span class="enlighter-g1">()</span><span class="enlighter-text"> </span><span class="enlighter-g1">{</span><span class="enlighter-text"></span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div>
+                                            <span class="enlighter-text"> </span><span class="enlighter-k0">return</span><span class="enlighter-text"> </span><span class="enlighter-g1">(</span><span class="enlighter-k5">int</span><span class="enlighter-g1">)(</span><span class="enlighter-text">Math.</span><span class="enlighter-m3">random</span><span class="enlighter-g1">()</span><span class="enlighter-text">*</span><span class="enlighter-n1">1000</span><span class="enlighter-g1">)</span><span class="enlighter-text">;</span>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"></span></div>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="enlighter-text"> </span><span class="enlighter-g1">}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="enlighter-raw">@Override
+                                    public int hashCode() {
+
+                                    return (int)(Math.random()*1000);
+
+                                    }</div>
+                            </div>
+                            <div class="enlighter-toolbar-bottom enlighter-toolbar"></div>
+                        </div>
+                        <pre class="EnlighterJSRAW enlighter-origin" data-enlighter-language="java"
+                            data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers=""
+                            data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Override
+ public int hashCode() {
+
+ return (int)(Math.random()*1000);
+
+ }</pre>
+
+
+
+                        <p>Estaremos calculando al azar el hashcode y dos objetos iguales devolverán hashcodes
+                            diferentes
+                            .El&nbsp;HashSet<strong> nos devolverá false cuando invoquemos el método contains aunque sabemos que el elemento existe en el conjunto</strong>.
+                        </p>
+
+
+
+                        <figure class="wp-block-image"><a
+                                href="https://www.arquitecturajava.com/wp-content/uploads/false.png"><img decoding="async" width="350" height="95" src="https://www.arquitecturajava.com/wp-content/uploads/false.png" alt="false" class="wp-image-7019 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/false.png 350w, https://www.arquitecturajava.com/wp-content/uploads/false-300x81.png 300w" data-lazy-sizes="(max-width: 350px) 100vw, 350px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/false.png" data-ll-status="loaded" sizes="(max-width: 350px) 100vw, 350px" srcset="https://www.arquitecturajava.com/wp-content/uploads/false.png 350w, https://www.arquitecturajava.com/wp-content/uploads/false-300x81.png 300w"><noscript><img decoding="async" width="350" height="95" src="https://www.arquitecturajava.com/wp-content/uploads/false.png" alt="false" class="wp-image-7019" srcset="https://www.arquitecturajava.com/wp-content/uploads/false.png 350w, https://www.arquitecturajava.com/wp-content/uploads/false-300x81.png 300w" sizes="(max-width: 350px) 100vw, 350px" /></noscript></a>
+                        </figure>
+
+
+
+                        <h2 class="wp-block-heading" id="h-java-equals-y-hashcode">Java equals y hashcode</h2>
+
+
+
+                        <p>Esto se debe a que Java comparará dos elementos primero por su hashcode y como no coinciden
+                            directamente devolverá falso&nbsp;. Por lo tanto si queremos sobreescribir correctamente los
+                            métodos equals y hashcode debemos asegurarnos de que cuando dos objetos sean iguales
+                            devuelvan el mismo hashcode.
+                            <strong>Eso sí aunque nos parezca curioso dos objetos diferentes pueden tener mismo hashcode. Esto no está en constradicción con lo anteriormente&nbsp;expuesto</strong>
+                            ya que el hashcode lo que confirma es que se encuentran en el mismo grupo no que sean
+                            idénticos como la siguiente imagen muestra.</p>
+
+
+
+                        <figure class="wp-block-image size-full">
+                            <img decoding="async" width="308" height="265" src="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png" alt="" class="wp-image-20097 entered lazyloaded" data-lazy-srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/hashcodes-300x258.png 300w" data-lazy-sizes="(max-width: 308px) 100vw, 308px" data-lazy-src="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png" data-ll-status="loaded" sizes="(max-width: 308px) 100vw, 308px" srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/hashcodes-300x258.png 300w"><noscript><img decoding="async" width="308" height="265" src="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png" alt="" class="wp-image-20097" srcset="https://www.arquitecturajava.com/wp-content/uploads/hashcodes.png 308w, https://www.arquitecturajava.com/wp-content/uploads/hashcodes-300x258.png 300w" sizes="(max-width: 308px) 100vw, 308px" /></noscript>
+                        </figure>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
