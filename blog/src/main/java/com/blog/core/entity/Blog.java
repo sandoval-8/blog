@@ -13,7 +13,7 @@ public class Blog {
 	private String title;
 	private String contentBlog;
 	private LocalDateTime created;
-	private boolean enabled;
+	private Boolean enabled;
 	private Long type;
 	private String category;
 	private String filename;
@@ -51,10 +51,10 @@ public class Blog {
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
-	public boolean isEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 	public Long getType() {
@@ -87,5 +87,5 @@ public class Blog {
 	public void setImages(List<ImageDao> images) {
 		this.images = images;
 	}
-		
+	
 }

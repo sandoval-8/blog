@@ -3,30 +3,28 @@ package com.blog.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import com.blog.core.entity.Image;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-public class ImageDto implements Serializable {
+public class ImageDto extends Image implements Serializable {
 
 	private static final long serialVersionUID = -4162474413676943629L;
-	private MultipartFile file;
 	private Long id;
 	private String name;
 	private LocalDateTime created;
 	private String url;
-	private boolean enabled;
 	private String suffix;
+	private boolean enabled;
 	private Long blogId;
+	@NotNull(message = "Este campo no puede ser nulo")
+	private MultipartFile file;
 	
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
 	public Long getId() {
 		return id;
 	}
@@ -51,17 +49,17 @@ public class ImageDto implements Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 	public String getSuffix() {
 		return suffix;
 	}
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	public Long getBlogId() {
 		return blogId;
@@ -69,4 +67,11 @@ public class ImageDto implements Serializable {
 	public void setBlogId(Long blogId) {
 		this.blogId = blogId;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
 }

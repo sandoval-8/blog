@@ -36,14 +36,8 @@ public class BlogController {
 	
 	@GetMapping(path = "/search")
 	public ResponseEntity<List<BlogDto>> getListBlog(Long id) {
-		List<Blog> blogList = blogService.getEntity(id);
-		List<BlogDto> blogDtoList = new ArrayList<BlogDto>();
-		if(!blogList.isEmpty()) { //No deberían llegar vacíos nunca
-			for(Blog blog : blogList) {
-				blogDtoList.add(blogMapper.blogToBlogDto(blog));
-			}
-		}
-		return new ResponseEntity<List<BlogDto>>(blogDtoList, HttpStatus.OK);
+		List<BlogDto> blogList = (List<BlogDto>) blogService.getEntity(id);
+		return new ResponseEntity<List<BlogDto>>(blogList, HttpStatus.OK);
 	}
 	
 	@GetMapping(produces = MediaType.TEXT_HTML_VALUE)
@@ -62,8 +56,7 @@ public class BlogController {
 	
 	@PutMapping
 	public ResponseEntity<BlogDto> updateBlog(BlogDto blogRequest) {
-		Blog blogUpdated = blogService.updateEntity(blogMapper.blogDtoToBlog(blogRequest));
-		BlogDto blogResponse = blogMapper.blogToBlogDto(blogUpdated);
+		BlogDto blogResponse = (BlogDto) blogService.updateEntity(blogRequest);
 		return new ResponseEntity<BlogDto>(blogResponse, HttpStatus.OK);
 	}
 	

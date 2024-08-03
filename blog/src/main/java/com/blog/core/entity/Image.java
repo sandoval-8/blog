@@ -9,9 +9,9 @@ public class Image {
 	private LocalDateTime created;
 	private String url;
 	private String suffix;
-	private byte[] image;
 	private boolean enabled;
-	private Long blogId;
+	private byte[] image;
+	//private Long blogId;
 	
 	public Long getId() {
 		return id;
@@ -55,10 +55,10 @@ public class Image {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	public Long getBlogId() {
+	/*public Long getBlogId() {
 		return blogId;
 	}
 	public void setBlogId(Long blogId) {
 		this.blogId = blogId;
-	}
+	}*/
 }

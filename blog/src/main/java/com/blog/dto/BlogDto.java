@@ -37,7 +37,7 @@ public class BlogDto extends Blog implements Serializable {
 		this.id = id;
 	}
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -54,7 +54,7 @@ public class BlogDto extends Blog implements Serializable {
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
 	}
-	public boolean isEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 	public void setEnabled(Boolean enabled) {
@@ -90,7 +90,6 @@ public class BlogDto extends Blog implements Serializable {
 	public void setImages(List<ImageDao> images) {
 		this.images = images;
 	}
-	public Boolean getEnabled() {
-		return enabled;
-	}
+	
+	
 }

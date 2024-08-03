@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -41,30 +43,30 @@ public class ImageController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@GetMapping
+	@GetMapping//Listo
 	public ResponseEntity<?> getImage(Long id, String filename) {
 		//Falta implementar funcionalidad para filename
-		List<Image> imageList = imageService.getEntity(id);
-		if(Objects.isNull(imageList)) {
+		List<ImageDto> imageList = (List<ImageDto>) imageService.getEntity(id);
+		if(Objects.isNull(imageList) || imageList.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		Image image = imageList.get(0);
-		HttpHeaders cabecera = new HttpHeaders();
-		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getName() + "\"");
-		return new ResponseEntity<>(image.getImage(), cabecera, HttpStatus.OK);
+		ImageDto image = imageList.get(0);
+		HttpHeaders cabeceras = new HttpHeaders();
+		cabeceras.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getName() + "\"");
+		return new ResponseEntity<>(image.getImage(), cabeceras, HttpStatus.OK);
 	}
 
-	@PostMapping
-	public ResponseEntity<?> createImage(ImageDto imageCreate) throws IOException {
+	@PostMapping//Listo
+	public ResponseEntity<?> createImage(@Valid ImageDto imageCreate) throws IOException {
 		String[] filename = (imageCreate.getFile().getOriginalFilename()).split("\\.");
 		imageCreate.setSuffix(filename[filename.length - 1]);
-		Image image = imageService.createEntity(imageMapper.imageDtoToImage(imageCreate));
+		Image image = imageService.createEntity(imageCreate);
 		return new ResponseEntity<>(image.getId(), HttpStatus.OK);
 	}
 
 	@PutMapping
 	public ResponseEntity<?> updateImage(ImageDto imageUpdate) throws IOException {
-		Image image = imageService.updateEntity(imageMapper.imageDtoToImage(imageUpdate));
+		ImageDto image = (ImageDto) imageService.updateEntity(imageUpdate);
 		ImageDto imageResponse = imageMapper.imageToImageDto(image);
 		return new ResponseEntity<ImageDto>(imageResponse, HttpStatus.OK);
 	}

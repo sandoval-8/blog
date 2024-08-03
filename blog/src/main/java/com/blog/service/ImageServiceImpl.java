@@ -1,12 +1,8 @@
 package com.blog.service;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +58,7 @@ public class ImageServiceImpl implements ImageService {
 		return imageResponse;
 	}
 
+	//Esta re buggeada esta funcinalidad
 	@Override
 	public Image updateEntity(Image updateObject) {
 		//Tiene un problema: cuando actualicemos una imagen por lo que sea tambien se va a actualizar
@@ -72,6 +69,7 @@ public class ImageServiceImpl implements ImageService {
 			Optional<ImageDao> imageDaoOptional = imageRepository.findById(updateObject.getId());
 			if(imageDaoOptional.isPresent()) {
 				ImageDao imageDao = imageDaoOptional.get();
+				ImageDao updateImageDao = imageMapper.imageDtoToImageDao(image);
 				if(null != image.getFile()) {
 					String fileName;
 					try {
@@ -79,36 +77,12 @@ public class ImageServiceImpl implements ImageService {
 					} catch (IOException e) {
 						throw new RuntimeException("Hubo un error al guardar la imagen");
 					}
-					imageDao.setName(fileName);
-				}
-				Method[] fieldsImageDto = image.getClass().getDeclaredMethods();
-				Method[] fieldsImageDao = imageDao.getClass().getDeclaredMethods();
-				Map<String,Object> fieldsValues = new HashMap<String, Object>();
-				
-				for(Method field : fieldsImageDto) {
-					String nameField = field.getName();
-					Object valueField = null;
-					/*try {
-						valueField = field.get(nameField);
-					} catch (IllegalArgumentException | IllegalAccessException e) {
-						throw new RuntimeException("Hubo un error al mappear los campos Image");
-					}
-					if(null != valueField) {
-						fieldsValues.put(nameField, valueField);
-					}*/
+					updateImageDao.setName(fileName);
 				}
 				
-				for(Method field : fieldsImageDao) {
-					String nameField = field.invoke(updateObject, fieldsImageDao)
-					/*try {
-						//field.set(nameField, fieldsValues.get(nameField));
-					} catch (IllegalArgumentException | IllegalAccessException e) {
-						throw new RuntimeException("Hubo un error al mappear los campos Image");
-					}*/
-					
-				}
-				imageDao = imageRepository.save(imageDao);
-				return imageMapper.imageDaoToImage(imageDao);
+				updateImageDao.setCreated(imageDao.getCreated());
+				ImageDao imageDaoResponse = imageRepository.save(updateImageDao);
+				return imageMapper.imageDaoToImageDto(imageDaoResponse);
 				
 			} else {
 				//implementar funcionalidad si el id no existe en BBDD.
@@ -118,7 +92,6 @@ public class ImageServiceImpl implements ImageService {
 			//implementar funcionalidad si el id es nulo.
 			return null;
 		}
-		return null;
 	}
 
 	@Override

@@ -18,13 +18,12 @@ import com.blog.mapper.BlogMapper;
 import com.blog.persistence.BlogRepository;
 import com.blog.persistence.dao.BlogDao;
 
-
 @Service
 public class BlogServiceImpl implements BlogService {
 
 	@Autowired
 	private BlogRepository blogRepository;
-	
+
 	@Autowired
 	private BlogPersistence blogPersistence;
 
@@ -38,27 +37,28 @@ public class BlogServiceImpl implements BlogService {
 		String blogFilename = blogPersistence.saveBlog(blog);
 		// Guardar el nombre del archivo en 'createObect'
 		blog.setFilename(blogFilename);
-		//Borramos el contenido del blog para no guardarlo en en bbdd.
+		// Borramos el contenido del blog para no guardarlo en en bbdd.
 		blog.setContentBlog(null);
 		blog.setCreated(LocalDateTime.now());
-		blog.setEnabled(Objects.isNull(blog.isEnabled())? true:blog.isEnabled());
+		blog.setEnabled(Objects.isNull(blog.getEnabled()) ? true : blog.getEnabled());
 		// Guardar Blog en BBDD
-		BlogDao blogCreated = blogRepository.save(blogMapper.blogToBlogDao(blog));
-		return blogMapper.blogDaoToBlog(blogCreated);
+		BlogDao blogCreated = blogRepository.save(blogMapper.blogDtoToBlogDao(blog));
+		return blogMapper.blogDaoToBlogDto(blogCreated);
 	}
 
 	@Override
 	public Blog updateEntity(Blog updateObject) {
-		// Tiene un problema: cuando actualicemos un blog por lo que sea tambien se va aactualizar
+		// Tiene un problema: cuando actualicemos un blog por lo que sea tambien se va
+		// aactualizar
 		// la fecha de creacion, revisar eso, deberia haber un campo de actualizacion y
-		// no modificar elcampode creación.
+		// no modificar el campode creación.
 		if (null != updateObject.getId()) {
 			Optional<BlogDao> blogDaoOptional = blogRepository.findById(updateObject.getId());
 			if (blogDaoOptional.isPresent()) {
 				BlogDao blogDao = blogDaoOptional.get();
 				// String fileName = blogPersistence.saveImage(updateObject); //No existe blog
 				// persistence
-				return blogMapper.blogDaoToBlog(blogDao);
+				return blogMapper.blogDaoToBlogDto(blogDao);
 
 			} else {
 				// implementar funcionalidad si el id es nulo.
@@ -77,25 +77,31 @@ public class BlogServiceImpl implements BlogService {
 			if (blogDaoOptional.isPresent()) {
 				BlogDao blogDisabled = blogDaoOptional.get();
 				blogDisabled.setEnabled(false);
-				BlogDao imageResponse = blogRepository.save(blogDisabled);
-				return blogMapper.blogDaoToBlog(imageResponse);
+				BlogDao blogResponse = blogRepository.save(blogDisabled);
+				return blogMapper.blogDaoToBlogDto(blogResponse);
 			}
+			// Implementar funcionalidad si no existe el blog a eliminar.
 		}
-		// Implementar funcionalidad si no existe la imagen a eliminar.
+		// Implementar funcionalidad si no existe el blog a eliminar.
 		return null;
 	}
 
+	public String getHTMLBlog(String filename) {
+		String blogContent = blogPersistence.findBlog(filename);
+		return blogContent;
+	}
+
 	@Override
-	public List<Blog> getEntity(Long gettingObect) {
+	public List<? extends Blog> getEntity(Long gettingObect) {
 		// Si el parametro de busqueda es nulo traemos todos los datos
-		List<Blog> blogList = new ArrayList<Blog>();
-		if(Objects.isNull(gettingObect)) {
+		List<BlogDto> blogList = new ArrayList<BlogDto>();
+		if (Objects.isNull(gettingObect)) {
 			List<BlogDao> blogDaoList = blogRepository.findAll();
-			if(!blogDaoList.isEmpty()) {
-				for(BlogDao blogDao : blogDaoList) {
-					blogList.add(blogMapper.blogDaoToBlog(blogDao));
+			if (!blogDaoList.isEmpty()) {
+				for (BlogDao blogDao : blogDaoList) {
+					blogList.add(blogMapper.blogDaoToBlogDto(blogDao));
 				}
-				return blogList;	
+				return blogList;
 			} else {
 				throw new NotFoundException("No hay blogs para retornar.");
 			}
@@ -103,17 +109,12 @@ public class BlogServiceImpl implements BlogService {
 		Optional<BlogDao> blogDaoOptional = blogRepository.findById(gettingObect);
 		if (blogDaoOptional.isPresent()) {
 			BlogDao blogDao = blogDaoOptional.get();
-			Blog blog = blogMapper.blogDaoToBlog(blogDao);
+			BlogDto blog = blogMapper.blogDaoToBlogDto(blogDao);
 			blogList.add(blog);
 			return blogList;
 		} else {
 			throw new NotFoundException("No hay blogs para retornar.");
 		}
-	}
-	
-	public String getHTMLBlog(String filename) {
-		String blogContent = blogPersistence.findBlog(filename);
-		return blogContent;
 	}
 
 }

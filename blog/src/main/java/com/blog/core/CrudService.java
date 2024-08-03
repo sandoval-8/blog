@@ -18,6 +18,6 @@ public interface CrudService<T, E, K> {
 
 	T deleteEntity(K deleteObject);
 
-	List<T> getEntity(K gettingObect);
+	List<? extends T> getEntity(K gettingObect);
 
 }

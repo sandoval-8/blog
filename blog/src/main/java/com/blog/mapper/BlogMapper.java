@@ -14,4 +14,7 @@ public interface BlogMapper {
 	
 	BlogDao blogToBlogDao(Blog blog);
 	Blog blogDaoToBlog(BlogDao blogDao);
+	
+	BlogDao blogDtoToBlogDao(BlogDto blogDto);
+	BlogDto blogDaoToBlogDto(BlogDao blogDao);
 }
